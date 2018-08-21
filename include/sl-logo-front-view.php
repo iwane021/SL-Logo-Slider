@@ -1,5 +1,5 @@
 <?php
-function slick_logo_frontend(){
+function sl_logo_frontend(){
 	
 	global $wpdb;
 	
@@ -61,4 +61,4 @@ function slick_logo_frontend(){
 <?php
 	}
 }
-add_filter('filter_slick_logo', 'slick_logo_frontend');
+add_filter('filter_sl_logo', 'sl_logo_frontend');
