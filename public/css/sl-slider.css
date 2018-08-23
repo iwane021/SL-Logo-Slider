@@ -1,11 +1,14 @@
 /**
-* Plugin Name: Slick Logo Slider
+* Plugin Name: SL Logo Slider
 * Plugin URI: http://127.0.0.1/plugins/myplugin/
-* Description: Slick logo slider using Bootstrap
-* Version: 1.0
+* Description: SL Logo Slider is a wordPress plugin to include image logo on slider.
+* Version: 1.1
 * Author: Iwan Prasetiyo
 * Author URI: https://tukarpengetahuan.com/
 * License: GPL2
+* License URI:  https://www.gnu.org/licenses/gpl-2.0.html
+* Text Domain:  sl-logo-slider
+* Domain Path:  /languages
 */
 
 .boxes-slickslider h2 {
