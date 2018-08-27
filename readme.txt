@@ -36,7 +36,7 @@ Installing the plugins is very simple you can downloaded or just like installing
 * Click **Install Now** to install the **SL Logo Slider** Plugin.
 * The plugin will begin to download and install.
 * Now just click **Activate** to activate the plugin.
-* Place "apply_filters( 'filter_sl_logo', '');" in your front page of templates.
+* Place "apply_filters( 'filter_sls_logo', '');" in your front page of templates.
 
 If you still need help. visit [WordPress codex](https://codex.wordpress.org/Managing_Plugins#Installing_Plugins)
 

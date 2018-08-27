@@ -28,12 +28,12 @@ along with SL Logo Slider. If not, see {License URI}.
 
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
-define( 'SL_SLIDER', plugin_dir_url( __FILE__ ) );
-define( 'SL_SLIDER_PROCESS', plugin_dir_url( __FILE__ ) . 'include/' );
-define( 'SL_SITE_URL', site_url() );
+define( 'SLS_SLIDER', plugin_dir_url( __FILE__ ) );
+define( 'SLS_SLIDER_PROCESS', plugin_dir_url( __FILE__ ) . 'include/' );
+define( 'SLS_SITE_URL', site_url() );
 
 ###  Registered Admin Script / Style SL logo slider
-function admin_script_sl_slider() {
+function sls_admin_script() {
 	if ( is_admin() ) {
 		// we are in admin mode
 		wp_enqueue_script( 'jquery' );
@@ -43,128 +43,114 @@ function admin_script_sl_slider() {
 		
 		wp_enqueue_media();
 
-		wp_register_style( 'admin-sl-logo-css',  SL_SLIDER . 'admin/css/sl-admin-style.css' );
-		wp_enqueue_style( 'admin-sl-logo-css' );
+		wp_register_style( 'sls_admin_css',  SLS_SLIDER . 'admin/css/sls-admin-style.css' );
+		wp_enqueue_style( 'sls_admin_css' );
 		
 		wp_enqueue_style( 'thickbox' );
 
-		wp_register_script( 'sl_media_box', SL_SLIDER . 'admin/js/sl_media_box.js' );
+		wp_register_script( 'sls_media_box', SLS_SLIDER . 'admin/js/sls-media-box.js' );
 
 		if ( isset( $_GET["page"] ) ) {
 
 			$page = $_GET["page"];
-			if ( $page == "manage_sl_logo_slider" ) {
-				wp_enqueue_script( 'sl_media_box' );
+			if ( $page == "manage_sls_logo" ) {
+				wp_enqueue_script( 'sls_media_box' );
 			}
 
 		}
 	}
 }
-add_action( 'admin_enqueue_scripts', 'admin_script_sl_slider' );
+add_action( 'admin_enqueue_scripts', 'sls_admin_script' );
 
-###  Registered Script / Style SL logo slider
-function load_jquery() {
-    if ( ! wp_script_is( 'jquery', 'enqueued' )) {
-
-        //Enqueue
-		wp_register_script('jquery', SL_SLIDER . 'public/js/jquery-2.2.0.min.js');  
-        wp_enqueue_script( 'jquery' );
-    }
-}
-add_action( 'wp_enqueue_scripts', 'load_jquery' );
-
-function front_script_sl_slider() {
+function sls_frontend_script() {
 	
 	// Registering Style
-	wp_register_style( 'sl-logo-style',  SL_SLIDER . 'public/css/sl-slider.css' );
-	wp_enqueue_style( 'sl-logo-style' );
-	wp_register_style( 'sl-slick-style',  SL_SLIDER . 'public/slick/slick.css' );
-	wp_enqueue_style( 'sl-slick-style' );
-	wp_register_style( 'sl-slick-theme',  SL_SLIDER . 'public/slick/slick-theme.css' );
-	wp_enqueue_style( 'sl-slick-theme' );
+	wp_register_style( 'sls_slider_css',  SLS_SLIDER . 'public/css/sl-slider.css' );
+	wp_enqueue_style( 'sls_slider_css' );
+	wp_register_style( 'sls_slick_css',  SLS_SLIDER . 'public/slick/slick.css' );
+	wp_enqueue_style( 'sls_slick_css' );
+	wp_register_style( 'sls_slick_theme',  SLS_SLIDER . 'public/slick/slick-theme.css' );
+	wp_enqueue_style( 'sls_slick_theme' );
 	
 	//Registering Script
-	wp_register_script('sl-script', SL_SLIDER . 'public/slick/slick.js', array('jquery'));  
-	wp_enqueue_script('sl-script');
+	wp_register_script('sls_slick_js', SLS_SLIDER . 'public/slick/slick.js', array('jquery'));  
+	wp_enqueue_script('sls_slick_js');
 }
-add_action( 'wp_enqueue_scripts', 'front_script_sl_slider');
+add_action( 'wp_enqueue_scripts', 'sls_frontend_script');
 
 
 ###  plugin activation
-register_activation_hook( __FILE__, 'sl_slider_activate' );
-function sl_slider_activate() {
+register_activation_hook( __FILE__, 'sls_plugin_activate' );
+function sls_plugin_activate() {
 	
-	$option_data = array( 
-				'sl_slides_to_show' => 6, 
-				'sl_slides_to_scroll' => 1, 
-				'sl_autoplay' => 1, 
-				'sl_autoplay_speed' => 1500, 
-				'sl_arrows' => 0, 
-				'sl_dots' => 0, 
-				'sl_pause_on_hover' => 0
+	$options_data = array( 
+				'sls_slides_to_show' => intval(6), 
+				'sls_slides_to_scroll' => intval(1), 
+				'sls_autoplay' => intval(1), 
+				'sls_autoplay_speed' => intval(1500), 
+				'sls_arrows' => intval(0), 
+				'sls_dots' => intval(0), 
+				'sls_pause_on_hover' => intval(0)
 			);
 
 	// Add default options value to serilaize
-	$slOptions = maybe_serialize( $option_data );
+	$sls_serialize_options = maybe_serialize( $options_data );
 	
-	if ( get_option( 'sl_settings' ) ) {
-		add_option( 'sl_settings', $slOptions);
+	if ( get_option( 'sls_settings' ) !== false ) {
+		update_option( 'sls_settings', $sls_serialize_options);
 	}
 	else {
-		update_option( 'sl_settings', $slOptions);
+		add_option( 'sls_settings', $sls_serialize_options);
 	}
 }
 
 ###  plugin deactivation
-register_deactivation_hook( __FILE__, 'sl_slider_deactivate' );
-function sl_slider_deactivate() {
-	delete_option( 'sl_settings' );
+register_deactivation_hook( __FILE__, 'sls_plugin_deactivate' );
+function sls_plugin_deactivate() {
+	delete_option( 'sls_settings' );
 }
 
 ###  plugin uninstallation
-register_uninstall_hook( __FILE__, 'sl_slider_uninstall' );
-function sl_slider_uninstall() {
+register_uninstall_hook( __FILE__, 'sls_plugin_uninstall' );
+function sls_plugin_uninstall() {
     // Uninstall
 	require "uninstall.php";
 }
 
 ###  Unserialize option value
-if ( get_option( 'sl_settings' ) !== false ) {
-	$my_sl_options = maybe_unserialize( get_option( 'sl_settings' ) );
+if ( get_option( 'sls_settings' ) !== false ) {
+	$my_sls_options = maybe_unserialize( get_option( 'sls_settings' ) );
 
-define( 'SL_SLIDES_TO_SHOW', $my_sl_options['sl_slides_to_show'] );
-define( 'SL_SLIDES_TO_SCROLL', $my_sl_options['sl_slides_to_scroll'] );
-define( 'SL_AUTOPLAY', $my_sl_options['sl_autoplay'] );
-define( 'SL_AUTOPLAY_SPEED', $my_sl_options['sl_autoplay_speed'] );
-define( 'SL_ARROWS', $my_sl_options['sl_arrows'] );
-define( 'SL_DOTS', $my_sl_options['sl_dots'] );
-define( 'SL_PAUSE_ON_HOVER', $my_sl_options['sl_pause_on_hover'] );
+define( 'SLS_SLIDES_TO_SHOW', $my_sls_options['sls_slides_to_show'] );
+define( 'SLS_SLIDES_TO_SCROLL', $my_sls_options['sls_slides_to_scroll'] );
+define( 'SLS_AUTOPLAY', $my_sls_options['sls_autoplay'] );
+define( 'SLS_AUTOPLAY_SPEED', $my_sls_options['sls_autoplay_speed'] );
+define( 'SLS_ARROWS', $my_sls_options['sls_arrows'] );
+define( 'SLS_DOTS', $my_sls_options['sls_dots'] );
+define( 'SLS_PAUSE_ON_HOVER', $my_sls_options['sls_pause_on_hover'] );
 }
 
 ###  Add Plugin to Menu Admin
-function sl_slider_options() {
-	// add_menu_page( string $page_title, string $menu_title, string $capability, string $menu_slug, callable $function = '', string $icon_url = '', int $position = null );
-	// add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function = '' )
-	
-	add_menu_page('SL Logo Slider', 'SL Logo Slider', 'manage_options', 'sl_logo_slider', 'sl_logo_manage', 'dashicons-format-gallery');
-	add_submenu_page( 'sl_logo_slider', 'Manage SL Logo', 'Manage SL Logo', 'manage_options', 'manage_sl_logo_slider', 'sl_logo_manage');
-	add_submenu_page( 'sl_logo_slider', 'Settings', 'Settings', 'manage_options', 'setting_sl_logo_slider', 'sl_logo_settings');
-	remove_submenu_page('sl_logo_slider', 'sl_logo_slider');
+function sls_slider_options() {	
+	add_menu_page('SL Logo Slider', 'SL Logo Slider', 'manage_options', 'sls_logo', 'sls_logo_manage', 'dashicons-format-gallery');
+	add_submenu_page( 'sls_logo', 'Manage SL Logo', 'Manage SL Logo', 'manage_options', 'manage_sls_logo', 'sls_logo_manage');
+	add_submenu_page( 'sls_logo', 'Settings', 'Settings', 'manage_options', 'setting_sls_logo', 'sls_logo_settings');
+	remove_submenu_page('sls_logo', 'sls_logo');
 }
-add_action('admin_menu', 'sl_slider_options');
+add_action('admin_menu', 'sls_slider_options');
 
 
 ### Create Table
-require "include/sl_logo_database.php";
+require "include/sls-logo-database.php";
 
 ### Manage Logo
-function sl_logo_manage() {	
-	require "include/sl-logo-manage.php";
+function sls_logo_manage() {	
+	require "include/sls-logo-manage.php";
 }
 
 ### Settings
-function sl_logo_settings() {	
-	require "include/sl-logo-settings.php";
+function sls_logo_settings() {	
+	require "include/sls-logo-settings.php";
 }
 
-require_once('include/sl-logo-front-view.php');
+require_once('include/sls-logo-front-view.php');

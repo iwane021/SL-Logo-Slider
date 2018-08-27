@@ -3,9 +3,9 @@ This plugin created for wordpress to show logo slider
 
 > Copy below script and paste into page which you want this slider show
 ```
-<?php if ( function_exists('sl_logo_frontend') ) { sl_logo_frontend(); } ?>
+<?php if ( function_exists('sls_frontend') ) { sls_frontend(); } ?>
 OR
-<?php apply_filters( 'filter_sl_logo', ''); ?>
+<?php apply_filters( 'filter_sls_logo', ''); ?>
 ```
 
 **1. Preview for SL Logo Slider after installed and activate in Wordpress**
