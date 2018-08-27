@@ -3,7 +3,7 @@ This plugin created for wordpress to show logo slider
 
 > Copy below script and paste into page which you want this slider show
 ```
-<?php if ( function_exists('sls_frontend') ) { sls_frontend(); } ?>
+<?php if ( function_exists('sls_frontend_view') ) { sls_frontend_view(); } ?>
 OR
 <?php apply_filters( 'filter_sls_logo', ''); ?>
 ```
