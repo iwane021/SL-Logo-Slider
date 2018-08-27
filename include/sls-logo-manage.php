@@ -210,7 +210,7 @@
 							<?php
 								$image_count = 0;
 
-								foreach ( $images_results as $sls_image_data ) {
+								foreach ( (array) $images_results as $sls_image_data ) {
 									$image_count = $image_count + 1;
 									( $image_count % 2 == 0 ? $row_class = "sl-data-row-2" : $row_class = "sl-data-row-1" );
 									?>

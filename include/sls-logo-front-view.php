@@ -13,7 +13,7 @@ function sls_frontend_view(){
 				<h2><?php echo get_option( 'sls_title_slider' )?></h2>
 				<section class="customer-logos slider">
 				<?php
-					foreach ($images_results as $key => $sls_image_data) {
+					foreach ( (array) $images_results as $key => $sls_image_data) {
 				?>
 					<a rel="nofollow" <?php echo empty($sls_image_data->image_link_to) ? '' : 'target="_blank" href="'.$sls_image_data->image_link_to.'"'; ?>>
 						<div class="slide"><img alt="<?php echo $sls_image_data->image_title ?>" src="<?php echo $sls_image_data->image_path . $sls_image_data->image_name ?>"></div>
