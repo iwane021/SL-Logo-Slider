@@ -86,11 +86,11 @@
         break;
         
         case "del_image":
-			if( ! isset($_POST['sls_image_id']) ) {
+			if( ! isset($_GET['sls_image_id']) ) {
 				return;
 			}
 			
-			$sls_unique_id = (int) $_POST['sls_image_id'];
+			$sls_unique_id = (int) $_GET['sls_image_id'];
 			$sls_image_id = sanitize_text_field($sls_unique_id);
             
             $image_where = array(
