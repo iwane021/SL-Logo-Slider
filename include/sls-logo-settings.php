@@ -1,49 +1,29 @@
 <div id="wpbody">
     <div id="wpbody-content">
 		<div class="wrap">
-			<h1><?php _e( 'Settings', 'logo-slider' ) ?></h1>
-			<?php
-				global $wpdb;
-
-				if ( isset( $_GET['msg'] ) ) {
-					$msg = $_GET['msg'];
-				}
-
-			switch ( $msg ) {
-				case "settings_success":
-					?>				
-					<div class="notice notice-success is-dismissible" style="margin-top:10px;">
-						<p class="message">
-							<?php _e( "Update Settings Successfully.", "logo-slider" ) ?>
-						</p>
-					</div>
-					<?php
-					break;
-				case "settings_error":
-					?>
-					<div class="notice notice-error is-dismissible" style="margin-top:10px;">
-						<p class="message">';
-							<?php _e( "Update Settings Failed!!", "logo-slider" ) ?>
-						</p>
-					</div>
-					<?php
-					break;
-			}
-			?>
+			<h1><?php _e( 'Settings', 'sls-logo-text' ) ?></h1>
+			
+			<div id="popmsg" class='notice sl-notice' style='margin-top:10px;display:none;'>
+				<p class="message">
+					<?php _e( '<span></span>', 'sls-logo-text' ) ?>
+				</p>
+				<button type="button" class="sl-btn-notice">
+					<span class="screen-reader-text">Dismiss this notice.</span>
+				</button>
+			</div>
 			
 			<div class="sl-main-body sl-main-settings">
 				<div class="sl-left-settings-body">
 					<div class="sl-left-body-heading">
-						<h3><?php _e( 'SL Logo', 'logo-slider' ) ?></h3>
+						<h3><?php _e( 'SL Logo', 'sls-logo-text' ) ?></h3>
 					</div>
 					<div class="sl-settings">
 						<div class="sl-left-box">
-							<form action="<?php echo SLS_SLIDER_PROCESS; ?>sls-logo-process.php?sls_actions=edit_settings" method="post">
+							<form id="slsFormSettings" action="" method="post">
 							<?php
 								global $wpdb;
-	
 								$table_images = $wpdb->prefix . "sls_images";
-								$image_count = $wpdb->get_var( "SELECT COUNT(*) FROM $table_images" );
+								$image_count = $wpdb->get_var( "SELECT COUNT(*) FROM {$table_images}" );
 							?>
 							<table width="100%" border="0" cellspacing="5" cellpadding="5">
 								<tbody>
@@ -55,7 +35,7 @@
 											<?php _e( " : ", "sls-dot" ); ?>
 										</td>
 										<td>
-											<input type="number" min="2" max="<?php echo $image_count - 1; ?>" width="50" name="sls_slides_to_show" id="sl_slides_to_show" class="sl-options" value="<?php echo SLS_SLIDES_TO_SHOW; ?>">
+											<input type="number" min="2" max="<?php echo esc_html($image_count - 1); ?>" width="50" name="sls_slides_to_show" id="sl_slides_to_show" class="sl-options" value="<?php echo esc_html( SLS_SLIDES_TO_SHOW ); ?>">
 										</td>
 									</tr>
 									<tr>
@@ -66,7 +46,7 @@
 											<?php _e( " : ", "sls-dot" ); ?>
 										</td>
 										<td>
-											<input type="number" width="50" name="sls_slides_to_scroll" id="sl_slides_to_scroll" class="sl-options" value="<?php echo SLS_SLIDES_TO_SCROLL; ?>">
+											<input type="number" width="50" name="sls_slides_to_scroll" id="sl_slides_to_scroll" class="sl-options" value="<?php echo esc_html( SLS_SLIDES_TO_SCROLL ); ?>">
 										</td>
 									</tr>
 									<tr>
@@ -78,8 +58,8 @@
 										</td>
 										<td>
 											<select name="sls_autoplay">
-												<option value="1" <?php echo SLS_AUTOPLAY == '1' ? 'selected="selected"' : ''; ?>><?php _e('true','sls-setting') ?></option>
-												<option value="0" <?php echo SLS_AUTOPLAY == '0' ? 'selected="selected"' : ''; ?>><?php _e('false','sls-setting') ?></option>
+												<option value="1" <?php echo esc_html( SLS_AUTOPLAY ) == '1' ? 'selected="selected"' : ''; ?>><?php _e('true','sls-setting') ?></option>
+												<option value="0" <?php echo esc_html( SLS_AUTOPLAY ) == '0' ? 'selected="selected"' : ''; ?>><?php _e('false','sls-setting') ?></option>
 											</select>
 										</td>
 									</tr>
@@ -91,7 +71,7 @@
 											<?php _e( " : ", "sls-dot" ); ?>
 										</td>
 										<td>
-											<input type="number" width="50" name="sls_autoplay_speed" id="sl_autoplay_speed" class="sl-options" value="<?php echo SLS_AUTOPLAY_SPEED; ?>">
+											<input type="number" width="50" name="sls_autoplay_speed" id="sl_autoplay_speed" class="sl-options" value="<?php echo esc_html( SLS_AUTOPLAY_SPEED ); ?>">
 										</td>
 									</tr>
 									<tr>
@@ -103,8 +83,8 @@
 										</td>
 										<td>
 											<select name="sls_arrows">
-												<option value="0" <?php echo SLS_ARROWS == '0' ? 'selected="selected"' : ''; ?>><?php _e('false','sls-setting') ?></option>
-												<option value="1" <?php echo SLS_ARROWS == '1' ? 'selected="selected"' : ''; ?>><?php _e('true','sls-setting') ?></option>
+												<option value="0" <?php echo esc_html( SLS_ARROWS ) == '0' ? 'selected="selected"' : ''; ?>><?php _e('false','sls-setting') ?></option>
+												<option value="1" <?php echo esc_html( SLS_ARROWS ) == '1' ? 'selected="selected"' : ''; ?>><?php _e('true','sls-setting') ?></option>
 											</select>
 										</td>
 									</tr>
@@ -117,8 +97,8 @@
 										</td>
 										<td>
 											<select name="sls_dots">
-												<option value="0" <?php echo SLS_DOTS == '0' ? 'selected="selected"' : ''; ?>><?php _e('false','sls-setting') ?></option>
-												<option value="1" <?php echo SLS_DOTS == '1' ? 'selected="selected"' : ''; ?>><?php _e('true','sls-setting') ?></option>
+												<option value="0" <?php echo esc_html( SLS_DOTS ) == '0' ? 'selected="selected"' : ''; ?>><?php _e('false','sls-setting') ?></option>
+												<option value="1" <?php echo esc_html( SLS_DOTS ) == '1' ? 'selected="selected"' : ''; ?>><?php _e('true','sls-setting') ?></option>
 											</select>
 										</td>
 									</tr>
@@ -131,8 +111,8 @@
 										</td>
 										<td>
 											<select name="sls_pause_on_hover">
-												<option value="0" <?php echo SLS_PAUSE_ON_HOVER == '0' ? 'selected="selected"' : ''; ?>><?php _e('false','sls-setting') ?></option>
-												<option value="1" <?php echo SLS_PAUSE_ON_HOVER == '1' ? 'selected="selected"' : ''; ?>><?php _e('true','sls-setting') ?></option>
+												<option value="0" <?php echo esc_html( SLS_PAUSE_ON_HOVER ) == '0' ? 'selected="selected"' : ''; ?>><?php _e('false','sls-setting') ?></option>
+												<option value="1" <?php echo esc_html( SLS_PAUSE_ON_HOVER ) == '1' ? 'selected="selected"' : ''; ?>><?php _e('true','sls-setting') ?></option>
 											</select>
 										</td>
 									</tr>

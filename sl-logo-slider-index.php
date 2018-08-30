@@ -35,7 +35,7 @@ define( 'SLS_SITE_URL', site_url() );
 ###  Registered Admin Script / Style SL logo slider
 function sls_admin_script() {
 	if ( is_admin() ) {
-		// we are in admin mode
+		
 		wp_enqueue_script( 'jquery' );
 		wp_enqueue_script( 'jquery-ui-sortable' );
 		wp_enqueue_script( 'media-upload' );
@@ -50,17 +50,37 @@ function sls_admin_script() {
 
 		wp_register_script( 'sls_media_box', SLS_SLIDER . 'admin/js/sls-media-box.js' );
 
-		if ( isset( $_GET["page"] ) ) {
-
-			$page = $_GET["page"];
-			if ( $page == "manage_sls_logo" ) {
+		if ( isset( $_REQUEST["page"] ) ) {
+			if ( $_REQUEST["page"] === "manage_sls_logo" ) {
 				wp_enqueue_script( 'sls_media_box' );
 			}
-
+			else {
+				return;
+			}
 		}
+		
 	}
 }
 add_action( 'admin_enqueue_scripts', 'sls_admin_script' );
+
+### Call Ajax Post Data
+function sls_ajax_enqueue() {
+	if ( is_admin() ) {
+		
+		if ( isset( $_REQUEST["page"] ) ) {
+			if ( $_REQUEST["page"] === "manage_sls_logo" || $_REQUEST["page"] === "setting_sls_logo" ) {
+				wp_enqueue_script( 'sls-ajax-script', plugins_url( '/admin/js/sls-ajax-call.js', __FILE__ ), array('jquery') );
+				wp_localize_script( 'sls-ajax-script', 'ajax_object', array( 'sls_ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+			}
+			else {
+				return;
+			}
+		}
+	
+	}
+}
+add_action( 'admin_enqueue_scripts', 'sls_ajax_enqueue' );
+
 
 function sls_frontend_script() {
 	
@@ -73,6 +93,7 @@ function sls_frontend_script() {
 	wp_enqueue_style( 'sls_slick_theme' );
 	
 	//Registering Script
+	wp_enqueue_script( 'jquery' );
 	wp_register_script('sls_slick_js', SLS_SLIDER . 'public/slick/slick.js', array('jquery'));  
 	wp_enqueue_script('sls_slick_js');
 }
@@ -84,17 +105,19 @@ register_activation_hook( __FILE__, 'sls_plugin_activate' );
 function sls_plugin_activate() {
 	
 	$options_data = array( 
-				'sls_slides_to_show' => intval(6), 
-				'sls_slides_to_scroll' => intval(1), 
-				'sls_autoplay' => intval(1), 
-				'sls_autoplay_speed' => intval(1500), 
-				'sls_arrows' => intval(0), 
-				'sls_dots' => intval(0), 
-				'sls_pause_on_hover' => intval(0)
+				'sls_slides_to_show' => (int) 6, 
+				'sls_slides_to_scroll' => (int) 1, 
+				'sls_autoplay' => (int) 1, 
+				'sls_autoplay_speed' => (int) 1500, 
+				'sls_arrows' => (int) 0, 
+				'sls_dots' => (int) 0, 
+				'sls_pause_on_hover' => (int) 0
 			);
 
 	// Add default options value to serilaize
-	$sls_serialize_options = maybe_serialize( $options_data );
+	if( is_array($options_data) ) {
+		$sls_serialize_options = maybe_serialize( $options_data );
+	}
 	
 	if ( get_option( 'sls_settings' ) !== false ) {
 		update_option( 'sls_settings', $sls_serialize_options);
@@ -131,7 +154,7 @@ define( 'SLS_PAUSE_ON_HOVER', $my_sls_options['sls_pause_on_hover'] );
 }
 
 ###  Add Plugin to Menu Admin
-function sls_slider_options() {	
+function sls_slider_options() {
 	add_menu_page('SL Logo Slider', 'SL Logo Slider', 'manage_options', 'sls_logo', 'sls_logo_manage', 'dashicons-format-gallery');
 	add_submenu_page( 'sls_logo', 'Manage SL Logo', 'Manage SL Logo', 'manage_options', 'manage_sls_logo', 'sls_logo_manage');
 	add_submenu_page( 'sls_logo', 'Settings', 'Settings', 'manage_options', 'setting_sls_logo', 'sls_logo_settings');
@@ -153,4 +176,5 @@ function sls_logo_settings() {
 	require "include/sls-logo-settings.php";
 }
 
+require_once('include/sls-logo-process.php');
 require_once('include/sls-logo-front-view.php');
