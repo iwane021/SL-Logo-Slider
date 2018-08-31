@@ -1,11 +1,11 @@
 === SL Logo Slider ===
 Contributors: iwane
-Tags: slider log, logo slider image, slick logo slider, wordpress logo slider, logo slider responsive
+Tags: slider logo, logo slider image, slick logo slider, simple logo slider, wordpress logo slider, logo slider responsive
 Donate link: https://www.tukarpengetahuan.com/kontak
 Requires at least: 4.0
 Tested up to: 4.8
 Requires PHP: 5.6
-Stable tag: 1.1
+Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,8 +18,9 @@ A WordPress Image Logo slider based on Slick Slider Jquery to display image logo
 
 * Very simple setting configuration
 * Default setting for logo is 5 slides
-* Fully Responsive 
-* Unlimited Slides
+* Fully responsive 
+* Unlimited images to uploaded
+* Custom link for each images redirect to another site
 * Custom title for the logo slide
 * Supported in all major browsers
 * Support arrows navigation and dots arrows
@@ -50,7 +51,6 @@ Do you have questions or issues with SL Logo Slider? [Ask for support here.](htt
 3. preview-sl-settings.(png|jpg|jpeg|gif).
 
 == Changelog ==
-= version 1.4.1 =
 
-= 1.1 =
+= 1.0 =
 * Initial release.
