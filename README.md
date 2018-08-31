@@ -10,15 +10,15 @@ OR
 
 **1. Preview for SL Logo Slider after installed and activate in Wordpress**
 
-<img src="https://github.com/iwane021/sl-logo-slider/blob/master/preview-front-sl-slider.jpg" alt="preview-front-sl-slider"/>
+<img src="https://github.com/iwane021/sl-logo-slider/blob/master/screenshot-1.jpg" alt="preview-front-sl-slider"/>
 
 **2. Preview for SL Logo Slider Manage**
 
-<img src="https://github.com/iwane021/sl-logo-slider/blob/master/preview-sl-manage.jpg" alt="preview-sl-manage"/>
+<img src="https://github.com/iwane021/sl-logo-slider/blob/master/screenshot-2.jpg" alt="preview-sl-manage"/>
 
 **3. Preview for SL Logo Settings**
 
-<img src="https://github.com/iwane021/sl-logo-slider/blob/master/preview-sl-settings.jpg" alt="preview-sl-settings"/>
+<img src="https://github.com/iwane021/sl-logo-slider/blob/master/screenshot-3.jpg" alt="preview-sl-settings"/>
 
 
 
