@@ -5,14 +5,14 @@ Donate link: https://www.tukarpengetahuan.com/kontak
 Requires at least: 4.0
 Tested up to: 4.8
 Requires PHP: 5.6
-Stable tag: 1.2
+Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A WordPress Image Logo slider based on Slick Slider Jquery to display image logo slider on footer, post, page or theme.
+A WordPress Image Logo slider based on Slick jquery to display image logo on footer, post, page or theme.
 
 == Description ==
-A WordPress Image Logo slider based on Slick Slider Jquery to display image logo slider on footer, post, page or theme. It's an easy for usage, simple & responsive, which looks awesome in front page your theme or every single theme.
+A WordPress Image Logo slider based on Slick jquery to display image logo on footer, post, page or theme. It's an easy for usage, simple & responsive, which looks awesome in front page your theme or every single theme.
 
 = Features =
 
@@ -54,3 +54,7 @@ Do you have questions or issues with SL Logo Slider? [Ask for support here.](htt
 
 = 1.0 =
 * Initial release.
+
+= 2.0 =
+* Update Banner and Icon Image.
+* Update screenshoot image.
