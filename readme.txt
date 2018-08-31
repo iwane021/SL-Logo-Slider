@@ -5,7 +5,7 @@ Donate link: https://www.tukarpengetahuan.com/kontak
 Requires at least: 4.0
 Tested up to: 4.8
 Requires PHP: 5.6
-Stable tag: 1.0
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,9 +46,9 @@ If you still need help. visit [WordPress codex](https://codex.wordpress.org/Mana
 Do you have questions or issues with SL Logo Slider? [Ask for support here.](http://wordpress.org/support/plugin/sl-logo-slider)
 
 == Screenshots ==
-1. preview-front-sl-slider.(png|jpg|jpeg|gif).
-2. preview-sl-manage.(png|jpg|jpeg|gif).
-3. preview-sl-settings.(png|jpg|jpeg|gif).
+1. screenshot-1.(png|jpg)
+2. screenshot-2.(png|jpg)
+3. screenshot-3.(png|jpg)
 
 == Changelog ==
 

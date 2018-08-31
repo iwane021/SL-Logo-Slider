@@ -1,9 +1,9 @@
 <?php
 /**
 Plugin Name: SL Logo Slider
-Plugin URI: https://github.com/iwane021/sl-logo-slider
+Plugin URI: https://wordpress.org/plugins/sl-logo-slider/
 Description: SL Logo Slider is a wordPress plugin to include image logo on slider.
-Version: 1.0
+Version: 1.2
 Author: Iwan Prasetiyo
 Author URI: https://tukarpengetahuan.com/
 License: GPL2
